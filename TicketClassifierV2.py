@@ -495,19 +495,11 @@ def process_ticket(ticket):
     rule_priority, rule_priority_num = get_priority(ticket, main_category)
     rule_urgency = get_urgency(ticket)
 
-    if ml_priority and priority_confidence >= 55:
-        overall_priority_label = ml_priority
-        priority_method = "Machine Learning"
-    else:
-        overall_priority_label = rule_priority
-        priority_method = "Rule-Based Backup"
+    overall_priority_label = rule_priority
+    priority_method = "Rule-Based"
 
-    if ml_urgency and urgency_confidence >= 55:
-        urgency_label = ml_urgency
-        urgency_method = "Machine Learning"
-    else:
-        urgency_label = rule_urgency
-        urgency_method = "Rule-Based Backup"
+    urgency_label = rule_urgency
+    urgency_method = "Rule-Based"
 
     overall_priority_num = priority_to_number(overall_priority_label)
     urgency_num = get_urgency_code(urgency_label)
