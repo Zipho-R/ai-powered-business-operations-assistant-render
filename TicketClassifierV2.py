@@ -517,6 +517,7 @@ def process_ticket(ticket):
     else:
         response = get_response(main_category, overall_priority_num, urgency_num)
 
+<<<<<<< HEAD
     all_categories = list(dict.fromkeys(all_categories))
     csv_categories = ",".join(all_categories)
 
@@ -525,6 +526,12 @@ def process_ticket(ticket):
 
     if related_categories:
         display_categories = f"{main_category} | Also related: {', '.join(related_categories)}"
+=======
+    csv_categories = ",".join(all_categories)
+
+    if secondary_categories:
+        display_categories = f"{main_category} | Also related: {', '.join(secondary_categories)}"
+>>>>>>> ab3d658b01c693208d00269435e1bee779743350
     else:
         display_categories = main_category
 
