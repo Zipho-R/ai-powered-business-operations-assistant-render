@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Analytics Dashboard | The Pink Black Panthers</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        :root {
+            --black: #08080b;
+            --pink: #ff4fa3;
+            --hot-pink: #ff2f92;
+            --deep-pink: #c2185b;
+            --text-dark: #151515;
+            --text-muted: #555555;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .top-nav {
+            width: 100%;
+            min-height: 108px;
+            padding: 0 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background:
+                radial-gradient(circle at right, rgba(255,79,163,0.22), transparent 30%),
+                var(--black);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 34px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+
+        .brand::first-letter {
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            padding: 15px 22px;
+            border-radius: 999px;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,79,163,0.16);
+            color: var(--pink);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            padding: 78px 72px 65px;
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.28), transparent 30%),
+                linear-gradient(145deg, #08080b 0%, #171018 75%, #2a1020 100%);
+            color: white;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            padding: 14px 22px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 28px;
+        }
+
+        .badge::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            background: var(--pink);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--pink);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.05;
+            margin: 0 0 18px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            max-width: 1050px;
+            font-size: 21px;
+            line-height: 1.8;
+            color: #f2e7ee;
+            margin: 0;
+        }
+
+        .page {
+            padding: 50px 72px 85px;
+            background: white;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 34px;
+        }
+
+        .summary-card {
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.20), transparent 35%),
+                #08080b;
+            color: white;
+            padding: 24px;
+            border-radius: 24px;
+            transition: 0.25s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+        }
+
+        .summary-card h3 {
+            margin: 0 0 12px;
+            font-size: 18px;
+            color: #ffb7d5;
+        }
+
+        .summary-card p {
+            margin: 8px 0;
+            font-size: 18px;
+            line-height: 1.6;
+            color: white;
+        }
+
+        .trend-increasing { color: #6ee7a8; font-weight: bold; }
+        .trend-decreasing { color: #ff8a8a; font-weight: bold; }
+        .trend-stable { color: #f2e7ee; font-weight: bold; }
+
+        .chart-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .chart-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .chart-card,
+        .trend-card {
+            border-radius: 30px;
+            padding: 32px;
+            animation: fadeIn 0.9s ease;
+        }
+
+        .chart-card {
+            background: white;
+            border: 1px solid #f0d9e2;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.08);
+        }
+
+        .chart-card h3,
+        .trend-card h3 {
+            margin: 0 0 22px;
+            font-size: 36px;
+            letter-spacing: -1px;
+        }
+
+        .trend-card {
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.24), transparent 35%),
+                #08080b;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .trend-card h3 { color: white; }
+
+        .trend-card p {
+            font-size: 19px;
+            line-height: 1.8;
+            color: #f2e7ee;
+            margin: 0;
+        }
+
+        canvas {
+            width: 100% !important;
+        }
+
+        .full-width { width: 100%; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 1200px) {
+            .top-nav {
+                padding: 28px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand {
+                font-size: 30px;
+                white-space: normal;
+            }
+
+            .nav-links a { font-size: 18px; }
+
+            .hero,
+            .page {
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+
+            .hero h1 { font-size: 48px; }
+
+            .summary-grid { grid-template-columns: repeat(2, 1fr); }
+
+            .chart-row { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 700px) {
+            .summary-grid { grid-template-columns: 1fr; }
+
+            .chart-card,
+            .trend-card {
+                padding: 22px;
+            }
+
+            .hero h1 { font-size: 40px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-nav">
+    <div class="brand">The Pink Black Panthers</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/log-ticket">Log Ticket</a>
+        <a href="/portal">Department Portal</a>
+        <a href="/admin-login?next=executive">Operations Overview</a>
+        <a href="/admin-login?next=analytics">Insights & Analytics</a>
+        <a href="/admin-login?next=reports">Business Reports</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="badge">Executive Analytics</div>
+    <h1>The <span>Analytics</span> Dashboard</h1>
+    <p>
+        Executive-level analytics for monitoring operational demand, service performance,
+        response patterns, workload forecasting, and department activity.
+    </p>
+</section>
+
+<main class="page">
+
+    <div class="summary-grid">
+        <div class="summary-card">
+            <h3>Forecast Summary</h3>
+            <p><strong>Expected Tickets:</strong> {{ insights.overall.prediction }}</p>
+            <p>
+                <strong>Trend:</strong>
+                <span class="
+                    {% if insights.overall.trend == 'Increasing' %}trend-increasing
+                    {% elif insights.overall.trend == 'Decreasing' %}trend-decreasing
+                    {% else %}trend-stable
+                    {% endif %}
+                ">
+                    {{ insights.overall.trend }}
+                </span>
+            </p>
+            <p><strong>Average per Day:</strong> {{ insights.overall.avg_tickets_per_day }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Department Outlook</h3>
+            <p><strong>Top Department:</strong> {{ insights.department.top_department }}</p>
+            <p>
+                <strong>Trend:</strong>
+                <span class="
+                    {% if insights.department.trend == 'Increasing' %}trend-increasing
+                    {% elif insights.department.trend == 'Decreasing' %}trend-decreasing
+                    {% else %}trend-stable
+                    {% endif %}
+                ">
+                    {{ insights.department.trend }}
+                </span>
+            </p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Response Outlook</h3>
+            <p><strong>Average Response Time:</strong> {{ insights.response_time.average_response_time }} hrs</p>
+            <p>
+                <strong>Trend:</strong>
+                <span class="
+                    {% if insights.response_time.trend == 'Increasing' %}trend-decreasing
+                    {% elif insights.response_time.trend == 'Decreasing' %}trend-increasing
+                    {% else %}trend-stable
+                    {% endif %}
+                ">
+                    {{ insights.response_time.trend }}
+                </span>
+            </p>
+        </div>
+
+        <div class="summary-card">
+            <h3>AI Classification</h3>
+            <p><strong>System Type:</strong> Hybrid ML + Rules</p>
+            <p><strong>Automation:</strong> Routing + Risk + Approval</p>
+        </div>
+    </div>
+
+    <div class="chart-stack">
+
+        <div class="chart-card full-width">
+            <h3>7-Day Ticket Volume Forecast</h3>
+            <canvas id="forecastChart" style="max-height: 340px;"></canvas>
+        </div>
+
+        <div class="chart-row">
+            <div class="chart-card">
+                <h3>Ticket Count by Category</h3>
+                <canvas id="categoryChart"></canvas>
+            </div>
+
+            <div class="trend-card">
+                <h3>Department Insight</h3>
+                <p>{{ insights.department.message }}</p>
+            </div>
+        </div>
+
+        <div class="chart-row">
+            <div class="chart-card">
+                <h3>Priority Distribution</h3>
+                <canvas id="priorityChart" style="max-height: 300px;"></canvas>
+            </div>
+
+            <div class="trend-card">
+                <h3>Priority Insight</h3>
+                <p>{{ insights.priority.message }}</p>
+            </div>
+        </div>
+
+        <div class="chart-row">
+            <div class="chart-card">
+                <h3>Total Response Time by Category</h3>
+                <canvas id="responseChart"></canvas>
+            </div>
+
+            <div class="trend-card">
+                <h3>Response Insight</h3>
+                <p>{{ insights.response_time.message }}</p>
+            </div>
+        </div>
+
+        <div class="chart-card full-width">
+            <h3>Ticket Count per Day</h3>
+            <canvas id="dayChart" style="max-height: 340px;"></canvas>
+        </div>
+
+        <div class="chart-card full-width">
+            <h3>Tickets per Priority in Each Department</h3>
+            <canvas id="groupedChart" style="max-height: 340px;"></canvas>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+Chart.register(ChartDataLabels);
+
+const categoryLabels = {{ category_labels | safe }};
+const categoryValues = {{ category_values | safe }};
+
+const priorityLabels = {{ priority_labels | safe }};
+const priorityValues = {{ priority_values | safe }};
+
+const responseLabels = {{ response_labels | safe }};
+const responseValues = {{ response_values | safe }};
+
+const dayLabels = {{ day_labels | safe }};
+const dayValues = {{ day_values | safe }};
+
+const groupedLabels = {{ grouped_labels | safe }};
+const groupedHigh = {{ grouped_high | safe }};
+const groupedMedium = {{ grouped_medium | safe }};
+const groupedLow = {{ grouped_low | safe }};
+
+const forecastHistoricalDates = {{ forecast_historical_dates | safe }};
+const forecastHistoricalValues = {{ forecast_historical_values | safe }};
+const forecastDates = {{ forecast_dates | safe }};
+const forecastValues = {{ forecast_values | safe }};
+
+const labelPlugin = {
+    color: '#08080b',
+    font: {
+        weight: 'bold',
+        size: 15
+    },
+    formatter: function(value) {
+        if (value === null || value === undefined || value === 0) {
+            return '';
+        }
+        return value;
+    }
+};
+
+new Chart(document.getElementById('forecastChart'), {
+    type: 'line',
+    data: {
+        labels: [...forecastHistoricalDates, ...forecastDates],
+        datasets: [
+            {
+                label: 'Historical Ticket Volume',
+                data: [...forecastHistoricalValues, ...Array(forecastValues.length).fill(null)],
+                borderColor: '#08080b',
+                backgroundColor: '#08080b',
+                tension: 0.3,
+                fill: false
+            },
+            {
+                label: 'Forecasted Ticket Volume',
+                data: [...Array(forecastHistoricalValues.length).fill(null), ...forecastValues],
+                borderColor: '#ff4fa3',
+                backgroundColor: '#ff4fa3',
+                borderDash: [6, 6],
+                tension: 0.3,
+                fill: false
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: { display: true },
+            datalabels: {
+                ...labelPlugin,
+                align: 'top',
+                anchor: 'end'
+            }
+        },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+
+new Chart(document.getElementById('categoryChart'), {
+    type: 'bar',
+    data: {
+        labels: categoryLabels,
+        datasets: [{
+            label: 'Ticket Count',
+            data: categoryValues,
+            backgroundColor: '#ff4fa3'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+                ...labelPlugin,
+                anchor: 'end',
+                align: 'top'
+            }
+        },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+
+new Chart(document.getElementById('priorityChart'), {
+    type: 'pie',
+    data: {
+        labels: priorityLabels,
+        datasets: [{
+            data: priorityValues,
+            backgroundColor: ['#08080b', '#ff4fa3', '#ffd9e8']
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+                color: '#ffffff',
+                font: {
+                    weight: 'bold',
+                    size: 18
+                },
+                formatter: function(value) {
+                    if (value === 0) {
+                        return '';
+                    }
+                    return value;
+                }
+            }
+        }
+    }
+});
+
+new Chart(document.getElementById('responseChart'), {
+    type: 'bar',
+    data: {
+        labels: responseLabels,
+        datasets: [{
+            label: 'Total Response Time (hrs)',
+            data: responseValues,
+            backgroundColor: '#08080b'
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+                ...labelPlugin,
+                anchor: 'end',
+                align: 'top'
+            }
+        },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+
+new Chart(document.getElementById('dayChart'), {
+    type: 'line',
+    data: {
+        labels: dayLabels,
+        datasets: [{
+            label: 'Tickets per Day',
+            data: dayValues,
+            borderColor: '#ff4fa3',
+            backgroundColor: '#ff4fa3',
+            tension: 0.3,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+                ...labelPlugin,
+                align: 'top',
+                anchor: 'end'
+            }
+        },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+
+new Chart(document.getElementById('groupedChart'), {
+    type: 'bar',
+    data: {
+        labels: groupedLabels,
+        datasets: [
+            {
+                label: 'High',
+                data: groupedHigh,
+                backgroundColor: '#08080b'
+            },
+            {
+                label: 'Medium',
+                data: groupedMedium,
+                backgroundColor: '#ff4fa3'
+            },
+            {
+                label: 'Low',
+                data: groupedLow,
+                backgroundColor: '#ffd9e8'
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            datalabels: {
+                ...labelPlugin,
+                anchor: 'end',
+                align: 'top'
+            }
+        },
+        scales: { y: { beginAtZero: true } }
+    }
+});
+</script>
+
+</body>
+</html>

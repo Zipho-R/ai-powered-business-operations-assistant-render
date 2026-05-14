@@ -1,0 +1,256 @@
+request,category,priority,urgency
+My laptop is not connecting to wifi,IT,Medium,Not Immediate
+I forgot my password and cannot login,IT,Medium,Not Immediate
+The server is down and users cannot access the system,IT,High,Immediate
+My email is not working,IT,Medium,Not Immediate
+The printer is not printing,IT,Medium,Not Immediate
+My computer keeps crashing,IT,High,Not Immediate
+There is a virus warning on my laptop,IT,High,Immediate
+The network connection is very slow,IT,Medium,Not Immediate
+I need software installed on my computer,IT,Low,Not Immediate
+The database is not opening,IT,Medium,Not Immediate
+The connection is slow,IT,Medium,Not Immediate
+The internet is slow,IT,Medium,Not Immediate
+The wifi keeps disconnecting,IT,Medium,Not Immediate
+My laptop is running slowly,IT,Medium,Not Immediate
+The system is taking long to load,IT,Medium,Not Immediate
+The application keeps freezing,IT,Medium,Not Immediate
+I cannot access my email,IT,Medium,Not Immediate
+The website is not loading,IT,Medium,Not Immediate
+My password reset is not working,IT,Medium,Not Immediate
+The network is unstable,IT,Medium,Not Immediate
+My account is locked,IT,Medium,Not Immediate
+The network is down,IT,High,Immediate
+The system crashed during work,IT,High,Immediate
+The screen is frozen,IT,Medium,Not Immediate
+The VPN is not connecting,IT,Medium,Not Immediate
+The portal gives an error message,IT,Medium,Not Immediate
+There is a security breach alert,IT,High,Immediate
+The firewall is blocking access,IT,High,Not Immediate
+The backup failed overnight,IT,High,Not Immediate
+My connection is bad,IT,Medium,Not Immediate
+The connection is poor,IT,Medium,Not Immediate
+The network signal is weak,IT,Medium,Not Immediate
+The connection keeps dropping,IT,Medium,Not Immediate
+I need help with my leave application,HR,Medium,Not Immediate
+My payslip is incorrect,HR,Medium,Not Immediate
+I want to apply for sick leave,HR,Medium,Not Immediate
+I need information about employee benefits,HR,Low,Not Immediate
+I want to report workplace harassment,HR,High,Not Immediate
+There is a conflict with my supervisor,HR,Medium,Not Immediate
+I need my contract updated,HR,Medium,Not Immediate
+I have a payroll query,HR,Medium,Not Immediate
+I need help with onboarding,HR,Low,Not Immediate
+I want to resign from my position,HR,Medium,Not Immediate
+My salary was not paid on time,HR,High,Immediate
+My overtime hours are missing from payroll,HR,Medium,Not Immediate
+I need clarification about my employment contract,HR,Medium,Not Immediate
+I need help with my probation review,HR,Medium,Not Immediate
+My manager has not completed my performance review,HR,Medium,Not Immediate
+I want to report workplace bullying,HR,High,Not Immediate
+I feel discriminated against by my supervisor,HR,High,Not Immediate
+I need to file a grievance,HR,High,Not Immediate
+I need HR support with a disciplinary meeting,HR,High,Not Immediate
+I need onboarding documents for a new employee,HR,Low,Not Immediate
+My leave days were deducted incorrectly,HR,Medium,Not Immediate
+I have a payroll deduction query,HR,Medium,Not Immediate
+There is a fraudulent payment on my account,Finance,High,Immediate
+The invoice has not been paid,Finance,Medium,Not Immediate
+I need reimbursement for travel expenses,Finance,Medium,Not Immediate
+There is an incorrect charge on the account,Finance,Medium,Not Immediate
+The budget report is wrong,Finance,Medium,Not Immediate
+I need a payment processed,Finance,Medium,Not Immediate
+There is a duplicate transaction,Finance,High,Not Immediate
+I need a tax statement,Finance,Low,Not Immediate
+The supplier invoice is overdue,Finance,High,Not Immediate
+There is an audit issue,Finance,High,Not Immediate
+A fraudulent payment was made from my account,Finance,High,Immediate
+There is fraud on my bank account,Finance,High,Immediate
+Someone made an unauthorized payment,Finance,High,Immediate
+There is an unauthorised transaction on my account,Finance,High,Immediate
+A suspicious transaction appeared on the finance account,Finance,High,Immediate
+My account shows a payment I did not make,Finance,High,Immediate
+There is a missing payment from the account,Finance,High,Immediate
+A supplier payment was processed incorrectly,Finance,Medium,Not Immediate
+A duplicate payment was made to the supplier,Finance,High,Not Immediate
+The account balance is incorrect after a payment,Finance,Medium,Not Immediate
+The company card was charged incorrectly,Finance,High,Not Immediate
+A payment failed but money left the account,Finance,High,Immediate
+I need petty cash reconciled,Finance,Low,Not Immediate
+The ledger entries are incorrect,Finance,Medium,Not Immediate
+The delivery is delayed,Operations,Medium,Not Immediate
+We are running low on stock,Operations,Medium,Not Immediate
+The warehouse has an inventory problem,Operations,Medium,Not Immediate
+The shipment has not arrived,Operations,Medium,Not Immediate
+There is an equipment failure,Operations,High,Immediate
+The production line has stopped,Operations,High,Immediate
+There was an accident on site,Operations,High,Immediate
+The courier route needs to be updated,Operations,Low,Not Immediate
+There is a quality inspection issue,Operations,Medium,Not Immediate
+The maintenance schedule needs updating,Operations,Low,Not Immediate
+The courier did not deliver the order,Operations,Medium,Not Immediate
+The warehouse stock count is wrong,Operations,Medium,Not Immediate
+There is no stock available for an urgent order,Operations,High,Immediate
+The inventory system does not match physical stock,Operations,Medium,Not Immediate
+A vehicle broke down during delivery,Operations,High,Immediate
+An employee was injured in the warehouse,Operations,High,Immediate
+There is a safety incident in the building,Operations,High,Immediate
+The facility needs urgent repair,Operations,High,Immediate
+The dispatch team sent the wrong order,Operations,Medium,Not Immediate
+The order was packed incorrectly,Operations,Medium,Not Immediate
+The materials for production are delayed,Operations,Medium,Not Immediate
+We have a shortage of supplies,Operations,High,Not Immediate
+The logistics route needs to be changed,Operations,Medium,Not Immediate
+The workflow is blocked because materials are missing,Operations,High,Immediate
+The project deadline is affected by stock delays,Operations,Medium,Not Immediate
+The warehouse needs capacity planning,Operations,Low,Not Immediate
+Salary processing was delayed because the payroll payment file failed validation,Finance,High,Immediate
+A suspicious login happened before payroll payments were processed,Finance,High,Immediate
+The payroll account shows an unauthorised salary transaction,Finance,High,Immediate
+Finance needs to verify a suspicious payroll payment before salaries are released,Finance,High,Immediate
+A salary payment batch contains duplicate employee payments,Finance,High,Immediate
+The bank account shows a payroll debit that finance did not approve,Finance,High,Immediate
+An employee salary was paid twice and needs urgent finance investigation,Finance,High,Immediate
+The monthly payroll payment file has incorrect banking details,Finance,High,Immediate
+A vendor invoice was approved without finance authorisation,Finance,High,Immediate
+There is possible fraud on the supplier payment account,Finance,High,Immediate
+A supplier payment was duplicated during the finance run,Finance,High,Not Immediate
+The finance ledger does not match the bank statement,Finance,Medium,Not Immediate
+The invoice amount does not match the approved purchase order,Finance,Medium,Not Immediate
+A reimbursement claim was submitted with missing receipts,Finance,Medium,Not Immediate
+The department budget balance appears incorrect after recent payments,Finance,Medium,Not Immediate
+A payment was made to the wrong supplier account,Finance,High,Immediate
+The VAT amount on the invoice is incorrect,Finance,Medium,Not Immediate
+A purchase order needs finance review before processing,Finance,Medium,Not Immediate
+The company credit card has an unknown charge,Finance,High,Not Immediate
+The payroll deduction amount is incorrect on the finance report,Finance,Medium,Not Immediate
+The supplier statement does not match our payment records,Finance,Medium,Not Immediate
+A refund has not reflected on the finance account,Finance,Medium,Not Immediate
+Finance must investigate missing funds from the department account,Finance,High,Immediate
+There is a suspicious transaction on the payroll bank account,Finance,High,Immediate
+An audit query was raised about unauthorised expenditure,Finance,High,Not Immediate
+The payroll system is not calculating overtime payments correctly,Finance,Medium,Not Immediate
+Several employees have incorrect salary amounts on the payment report,Finance,High,Immediate
+The finance account balance changed after an unknown debit,Finance,High,Immediate
+A fraudulent supplier invoice was submitted for payment,Finance,High,Immediate
+The payment approval record is missing from the finance system,Finance,High,Not Immediate
+My laptop cannot connect to the VPN while I am working remotely,IT,Medium,Not Immediate
+Several employees cannot access the payroll system login page,IT,High,Immediate
+The payroll system is showing a login error for all users,IT,High,Immediate
+The internal finance portal is not loading on my laptop,IT,Medium,Not Immediate
+The company system is unavailable after a server outage,IT,High,Immediate
+Employees cannot log into Microsoft Teams,IT,Medium,Not Immediate
+The authentication code is not working for my account,IT,Medium,Not Immediate
+The VPN disconnects every few minutes,IT,Medium,Not Immediate
+The payroll application keeps crashing when users open it,IT,High,Immediate
+The database connection failed during salary processing,IT,High,Immediate
+The finance system is down and users cannot access invoices,IT,High,Immediate
+There was a suspicious login attempt on the payroll system,IT,High,Immediate
+The firewall is blocking access to the finance portal,IT,High,Not Immediate
+My account is locked after too many login attempts,IT,Medium,Not Immediate
+The internal website gives a server error,IT,Medium,Not Immediate
+The laptop screen freezes whenever I open the payroll app,IT,Medium,Not Immediate
+A phishing email was sent to finance staff,IT,High,Immediate
+The system password reset link is not working,IT,Medium,Not Immediate
+The shared drive folder cannot be opened,IT,Medium,Not Immediate
+The company network is down in the office,IT,High,Immediate
+My leave balance is incorrect on the HR system,HR,Medium,Not Immediate
+Several employees have incorrect leave records,HR,Medium,Not Immediate
+HR needs to update my employment record before payroll closes,HR,Medium,Not Immediate
+My employee details are missing from the HR records,HR,Medium,Not Immediate
+I need HR to confirm my contract details,HR,Medium,Not Immediate
+My overtime hours were not captured by HR,HR,Medium,Not Immediate
+An employee has raised a harassment complaint,HR,High,Not Immediate
+I need to report discrimination in my department,HR,High,Not Immediate
+A staff member is being bullied by a supervisor,HR,High,Not Immediate
+HR needs to review a disciplinary case urgently,HR,High,Immediate
+My sick leave documents were not processed,HR,Medium,Not Immediate
+A new employee has not received onboarding documents,HR,Low,Not Immediate
+My maternity leave record needs correction,HR,Medium,Not Immediate
+My payroll profile has the wrong employment status,HR,Medium,Not Immediate
+HR must confirm employee records before salary processing,HR,Medium,Not Immediate
+The resignation paperwork has not been processed,HR,Medium,Not Immediate
+An employee submitted a grievance against their manager,HR,High,Not Immediate
+My benefits information is incorrect on the employee portal,HR,Low,Not Immediate
+The probation review form is missing from HR records,HR,Medium,Not Immediate
+The recruitment approval for a new hire is delayed,HR,Medium,Not Immediate
+The warehouse dispatch process stopped after equipment failure,Operations,High,Immediate
+A conveyor belt failure is delaying customer deliveries,Operations,High,Immediate
+The delivery route was blocked and orders are delayed,Operations,Medium,Not Immediate
+The stock count does not match the inventory report,Operations,Medium,Not Immediate
+The warehouse has no stock for urgent customer orders,Operations,High,Immediate
+The production workflow is blocked because materials are missing,Operations,High,Immediate
+A vehicle broke down during scheduled deliveries,Operations,High,Immediate
+The facility has a safety issue that needs urgent repair,Operations,High,Immediate
+The dispatch team cannot process orders due to missing packaging materials,Operations,Medium,Not Immediate
+Inventory reconciliation failed after the stocktake,Operations,Medium,Not Immediate
+The courier collected the wrong order from the warehouse,Operations,Medium,Not Immediate
+A shipment was delivered to the wrong branch,Operations,Medium,Not Immediate
+The production line stopped because the machine overheated,Operations,High,Immediate
+The warehouse floor has a safety hazard,Operations,High,Immediate
+Operations needs to reschedule deliveries after a route change,Operations,Medium,Not Immediate
+The branch received damaged stock from the supplier,Operations,Medium,Not Immediate
+The stock delivery is delayed because the supplier missed the deadline,Operations,Medium,Not Immediate
+The operations team needs extra capacity for month end orders,Operations,Low,Not Immediate
+The inspection process found quality issues with packed orders,Operations,Medium,Not Immediate
+The building maintenance request is affecting daily operations,Operations,Medium,Not Immediate
+The invoice was generated but the printer in finance is not working,IT,Medium,Not Immediate
+The salary report is ready but the finance approval file has duplicate payments,Finance,High,Immediate
+HR must verify employee records because payroll amounts are incorrect,HR,Medium,Not Immediate
+The payroll website is down and finance cannot process salaries,IT,High,Immediate
+The warehouse system is down and dispatch cannot release deliveries,IT,High,Immediate
+Finance needs to investigate a supplier refund that has not reflected,Finance,Medium,Not Immediate
+Operations needs help because the delivery schedule is delayed by missing stock,Operations,Medium,Not Immediate
+HR needs to update employee banking details before payroll processing,HR,Medium,Not Immediate
+A suspicious supplier invoice was uploaded through the finance portal,Finance,High,Immediate
+The internal payroll app is freezing during salary approval,IT,High,Immediate
+The payroll report contains duplicate employee records,Finance,High,Immediate
+The supplier payment reference number is incorrect,Finance,Medium,Not Immediate
+Finance cannot reconcile the latest transaction report,Finance,Medium,Not Immediate
+An unauthorised debit appeared on the company account,Finance,High,Immediate
+The payroll totals do not match the banking file,Finance,High,Immediate
+A suspicious invoice was submitted for approval,Finance,High,Immediate
+The supplier account details were changed without authorisation,Finance,High,Immediate
+A refund was processed incorrectly on the finance system,Finance,Medium,Not Immediate
+The finance report is missing recent transactions,Finance,Medium,Not Immediate
+The monthly expense report failed validation checks,Finance,Medium,Not Immediate
+My account password expired and I cannot login,IT,Medium,Not Immediate
+The VPN authentication service is unavailable,IT,High,Immediate
+The payroll server stopped responding overnight,IT,High,Immediate
+The laptop battery is failing during remote work,IT,Low,Not Immediate
+The shared network drive is inaccessible,IT,Medium,Not Immediate
+The payroll portal gives an internal server error,IT,High,Immediate
+The antivirus software detected a possible threat,IT,High,Immediate
+The employee portal is loading very slowly,IT,Medium,Not Immediate
+The company website crashed during peak usage,IT,High,Immediate
+The office internet connection is unstable,IT,Medium,Not Immediate
+My leave request was rejected incorrectly,HR,Medium,Not Immediate
+The HR portal shows the wrong employee information,HR,Medium,Not Immediate
+An employee complaint requires HR intervention,HR,High,Immediate
+The onboarding checklist is incomplete for new staff,HR,Low,Not Immediate
+My employment benefits are missing from the system,HR,Medium,Not Immediate
+The recruitment approval process is delayed,HR,Medium,Not Immediate
+A disciplinary hearing needs urgent HR support,HR,High,Immediate
+The payroll department requires updated HR records,HR,Medium,Not Immediate
+An employee resignation has not been processed,HR,Medium,Not Immediate
+The HR database contains duplicate employee profiles,HR,Medium,Not Immediate
+The warehouse received damaged stock from the supplier,Operations,Medium,Not Immediate
+Operations cannot complete deliveries because stock is unavailable,Operations,High,Immediate
+The dispatch process stopped during loading,Operations,High,Immediate
+A logistics scheduling conflict delayed customer deliveries,Operations,Medium,Not Immediate
+The maintenance team reported equipment failure,Operations,High,Immediate
+The warehouse inventory report is inaccurate,Operations,Medium,Not Immediate
+The production process stopped because materials are delayed,Operations,High,Immediate
+A delivery vehicle failed during transportation,Operations,High,Immediate
+The operations workflow is delayed by supplier shortages,Operations,Medium,Not Immediate
+The packaging department sent incorrect stock quantities,Operations,Medium,Not Immediate
+The payroll system login failed after a suspicious access attempt,IT,High,Immediate
+HR needs to verify employee banking details before payroll processing,HR,Medium,Not Immediate
+Finance identified duplicate salary payments during payroll review,Finance,High,Immediate
+The warehouse system is unavailable during dispatch processing,IT,High,Immediate
+Operations reported delayed deliveries because the routing system failed,Operations,High,Immediate
+The employee attendance system is not syncing correctly,HR,Medium,Not Immediate
+Finance needs urgent review of unauthorised supplier transactions,Finance,High,Immediate
+The network outage interrupted production workflows,IT,High,Immediate
+The supplier shipment arrived with incorrect inventory quantities,Operations,Medium,Not Immediate
+The payroll reconciliation process failed after incorrect deductions,Finance,High,Immediate

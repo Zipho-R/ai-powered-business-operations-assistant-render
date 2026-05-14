@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Executive Dashboard | The Pink Black Panthers</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        :root {
+            --black: #08080b;
+            --pink: #ff4fa3;
+            --deep-pink: #c2185b;
+            --text-dark: #151515;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .top-nav {
+            width: 100%;
+            min-height: 108px;
+            padding: 0 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background:
+                radial-gradient(circle at right, rgba(255,79,163,0.22), transparent 30%),
+                var(--black);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 34px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+
+        .brand::first-letter { color: var(--pink); }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            padding: 15px 22px;
+            border-radius: 999px;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,79,163,0.16);
+            color: var(--pink);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            padding: 78px 72px 65px;
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.28), transparent 30%),
+                linear-gradient(145deg, #08080b 0%, #171018 75%, #2a1020 100%);
+            color: white;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            padding: 14px 22px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 28px;
+        }
+
+        .badge::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            background: var(--pink);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--pink);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.05;
+            margin: 0 0 18px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span { color: var(--pink); }
+
+        .hero p {
+            max-width: 1050px;
+            font-size: 21px;
+            line-height: 1.8;
+            color: #f2e7ee;
+            margin: 0;
+        }
+
+        .page {
+            padding: 40px 18px 80px;
+            background: white;
+            width: 100%;
+        }
+
+        .summary-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 34px;
+        }
+
+        .summary-card {
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.20), transparent 35%),
+                #08080b;
+            color: white;
+            padding: 24px;
+            border-radius: 24px;
+            transition: 0.25s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 18px 45px rgba(0,0,0,0.18);
+        }
+
+        .summary-card h3 {
+            margin: 0 0 10px;
+            font-size: 16px;
+            color: #ffb7d5;
+        }
+
+        .summary-card p {
+            margin: 0;
+            font-size: 34px;
+            font-weight: bold;
+        }
+
+        .table-card {
+            background: white;
+            border: 1px solid #f0d9e2;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.08);
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .table-title {
+            font-size: 42px;
+            margin-top: 0;
+            margin-bottom: 26px;
+            letter-spacing: -1px;
+        }
+
+        .table-wrap {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: auto;
+            border-radius: 20px;
+            padding-bottom: 16px;
+        }
+
+        .table-wrap::-webkit-scrollbar {
+            height: 14px;
+        }
+
+        .table-wrap::-webkit-scrollbar-track {
+            background: #fff5fa;
+            border-radius: 999px;
+        }
+
+        .table-wrap::-webkit-scrollbar-thumb {
+            background: var(--pink);
+            border-radius: 999px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 2200px;
+        }
+
+        thead th {
+            background: #08080b;
+            color: white;
+            padding: 20px 16px;
+            text-align: left;
+            font-weight: bold;
+            font-size: 12pt;
+            white-space: nowrap;
+        }
+
+        tbody td {
+            background: white;
+            padding: 18px 16px;
+            border-bottom: 1px solid #f0d9e2;
+            font-size: 12pt;
+            vertical-align: top;
+            line-height: 1.7;
+        }
+
+        tbody tr:hover td {
+            background: #fff5fa;
+        }
+
+        .action-col {
+            position: sticky;
+            right: 0;
+            z-index: 3;
+            box-shadow: -8px 0 14px rgba(0,0,0,0.05);
+        }
+
+        thead .action-col {
+            background: #08080b;
+        }
+
+        tbody .action-col {
+            background: white;
+        }
+
+        tbody tr:hover .action-col {
+            background: #fff5fa;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 9px 16px;
+            border-radius: 999px;
+            font-size: 12pt;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .open { background: #ffe3ee; color: #c2185b; }
+        .progress { background: #ffb7d5; color: #111; }
+        .closed { background: #111; color: white; }
+        .pending { background: #fff3cd; color: #856404; }
+
+        .risk-box,
+        .ai-box,
+        .requester-box,
+        .comment-box {
+            border-radius: 16px;
+            padding: 14px 16px;
+            font-size: 12pt;
+            line-height: 1.6;
+            min-width: 230px;
+        }
+
+        .risk-box {
+            background: #fff5fa;
+            border: 1px solid #f4c7d9;
+            color: #444;
+        }
+
+        .ai-box,
+        .requester-box,
+        .comment-box {
+            background: #f9f9f9;
+            border: 1px solid #e8dce2;
+            color: #333;
+        }
+
+        .ai-box strong,
+        .requester-box strong,
+        .comment-box strong {
+            color: var(--deep-pink);
+        }
+
+        .time-value {
+            font-weight: bold;
+            color: var(--deep-pink);
+            white-space: nowrap;
+        }
+
+        .time-pending {
+            color: #856404;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .time-missing {
+            color: #c2185b;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .action-btn {
+            border: none;
+            padding: 13px 18px;
+            border-radius: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 12pt;
+            transition: 0.25s ease;
+            white-space: nowrap;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .start-btn { background: var(--pink); color: white; }
+        .close-btn { background: #111; color: white; }
+        .approve-btn { background: #ff69b4; color: #111; }
+
+        .resolved-text {
+            font-weight: bold;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .small-note {
+            display: block;
+            margin-top: 8px;
+            font-size: 12pt;
+            color: #666;
+        }
+
+        @media (max-width: 1200px) {
+            .top-nav {
+                padding: 28px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand {
+                font-size: 30px;
+                white-space: normal;
+            }
+
+            .nav-links a { font-size: 18px; }
+
+            .hero,
+            .page {
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+
+            .hero h1 { font-size: 48px; }
+
+            .summary-strip {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 700px) {
+            .summary-strip { grid-template-columns: 1fr; }
+            .table-card { padding: 16px; }
+            .hero h1 { font-size: 40px; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-nav">
+    <div class="brand">The Pink Black Panthers</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/log-ticket">Log Ticket</a>
+        <a href="/portal">Department Portal</a>
+        <a href="/admin-login?next=analytics">Insights & Analytics</a>
+        <a href="/admin-login?next=executive">Operations Overview</a>
+        <a href="/admin-login?next=reports">Business Reports</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="badge">Executive Oversight Dashboard</div>
+
+    <h1>The <span>Executive</span> Dashboard</h1>
+
+    <p>
+        Central oversight view for monitoring ticket activity across all departments,
+        requester information, workflow progress, risk flags, response times,
+        and resolution outcomes.
+    </p>
+</section>
+
+<main class="page">
+
+    <div class="summary-strip">
+        <div class="summary-card">
+            <h3>Total Tickets</h3>
+            <p>{{ tables|length }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Open Tickets</h3>
+            <p>{{ tables | selectattr("Status", "equalto", "Open") | list | length }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>In Progress</h3>
+            <p>{{ tables | selectattr("Status", "equalto", "In Progress") | list | length }}</p>
+        </div>
+
+        <div class="summary-card">
+            <h3>Closed Tickets</h3>
+            <p>{{ tables | selectattr("Status", "equalto", "Closed") | list | length }}</p>
+        </div>
+    </div>
+
+    <div class="table-card">
+        <h2 class="table-title">Ticket Oversight</h2>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ticket ID</th>
+                        <th>Requester</th>
+                        <th>Request</th>
+                        <th>Category</th>
+                        <th>AI Details</th>
+                        <th>Priority</th>
+                        <th>Urgency</th>
+                        <th>Response Time</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Risk</th>
+                        <th>Resolution</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in tables %}
+                    {% set approval = row.approval_status|string|trim %}
+                    {% set status = row.Status|string|trim %}
+                    {% set response_time = row.response_time_hours|string|trim %}
+                    {% set resolution_comment = row.resolution_comment|string|trim %}
+
+                    <tr>
+                        <td>{{ row.TicketID }}</td>
+
+                        <td>
+                            <div class="requester-box">
+                                <strong>{{ row.first_name }} {{ row.surname }}</strong><br>
+                                <span class="small-note">{{ row.email if row.email else "No email provided" }}</span>
+                            </div>
+                        </td>
+
+                        <td>{{ row.request }}</td>
+                        <td>{{ row.category }}</td>
+
+                        <td>
+                            <div class="ai-box">
+                                <strong>Category:</strong>
+                                {{ row.category_confidence if row.category_confidence else row.ml_confidence if row.ml_confidence else "N/A" }}%
+                                <br>
+                                <span class="small-note">{{ row.classification_method if row.classification_method else "Existing record" }}</span>
+
+                                <br><br>
+
+                                <strong>Priority:</strong>
+                                {{ row.priority_confidence if row.priority_confidence else "N/A" }}%
+                                <br>
+                                <span class="small-note">{{ row.priority_method if row.priority_method else "Existing record" }}</span>
+
+                                <br><br>
+
+                                <strong>Urgency:</strong>
+                                {{ row.urgency_confidence if row.urgency_confidence else "N/A" }}%
+                                <br>
+                                <span class="small-note">{{ row.urgency_method if row.urgency_method else "Existing record" }}</span>
+                            </div>
+                        </td>
+
+                        <td>{{ row.priority }}</td>
+                        <td>{{ row.urgency }}</td>
+
+                        <td>
+                            {% if response_time and response_time|lower not in ["nan", "none", "nat", "pending", "pending closure"] %}
+                                <span class="time-value">{{ response_time }} hrs</span>
+                            {% elif status == "Closed" %}
+                                <span class="time-missing">Missing time</span>
+                            {% else %}
+                                <span class="time-pending">Pending closure</span>
+                            {% endif %}
+                        </td>
+
+                        <td>{{ row.date }}</td>
+
+                        <td>
+                            {% if status == "Open" %}
+                                <span class="status-badge open">Open</span>
+                            {% elif status == "In Progress" %}
+                                <span class="status-badge progress">In Progress</span>
+                            {% elif status == "Pending Approval" %}
+                                <span class="status-badge pending">Pending Approval</span>
+                            {% elif status == "Pending Review" %}
+                                <span class="status-badge pending">Pending Review</span>
+                            {% elif status == "Closed" %}
+                                <span class="status-badge closed">Closed</span>
+                            {% else %}
+                                <span class="status-badge closed">{{ status if status else "Closed" }}</span>
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <div class="risk-box">
+                                {{ row.risk_flags if row.risk_flags else "No major risk detected" }}
+                            </div>
+                        </td>
+
+                        <td>
+                            {% if status == "Closed" %}
+                                <div class="comment-box">
+                                    <strong>Final Comment:</strong><br>
+                                    {{ resolution_comment if resolution_comment and resolution_comment|lower not in ["nan", "none", "nat"] else "No resolution comment recorded." }}
+                                    <span class="small-note">Read-only after closure</span>
+                                </div>
+                            {% else %}
+                                <span class="small-note">Resolution comment added when department closes the ticket.</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</main>
+
+</body>
+</html>
