@@ -6,3 +6,4 @@ reportlab
 openpyxl
 numpy
 matplotlib
+gunicorn
