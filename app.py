@@ -5,6 +5,8 @@ from datetime import datetime
 import os
 import json
 import sqlite3
+import psycopg2
+from sqlalchemy import create_engine
 import random
 from predictive_insights import build_predictive_insights
 from TicketClassifierV2 import process_ticket
@@ -14,6 +16,14 @@ app = Flask(__name__)
 file_name = "tickets.csv"
 DB_FILE = "tickets.db"
 TABLE_NAME = "tickets"
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if DATABASE_URL:
+    DATABASE_URL = DATABASE_URL.replace("postgres://", "postgresql://", 1)
+    engine = create_engine(DATABASE_URL)
+else:
+    engine = None
 
 ADMIN_PASSWORD = "PBP"
 DEPARTMENT_PASSWORD = "PBP"
@@ -172,6 +182,8 @@ def is_missing_response_time(value):
 # ==========================================================
 
 def get_connection():
+    if engine:
+        return engine.connect()
     return sqlite3.connect(DB_FILE)
 
 
@@ -181,11 +193,15 @@ def load_tickets_df():
     If old database records do not have the new columns, they are added automatically.
     This keeps old tickets from breaking when the schema evolves.
     """
-    with get_connection() as conn:
-        try:
-            df = pd.read_sql_query(f"SELECT * FROM {TABLE_NAME}", conn)
-        except Exception:
-            df = pd.DataFrame(columns=required_columns)
+    try:
+        if engine:
+            df = pd.read_sql_table(TABLE_NAME, con=engine)
+        else:
+            with get_connection() as conn:
+                df = pd.read_sql_query(f"SELECT * FROM {TABLE_NAME}", conn)
+
+    except Exception:
+        df = pd.DataFrame(columns=required_columns)
 
     for col in required_columns:
         if col not in df.columns:
@@ -240,9 +256,11 @@ def save_tickets_df(df_to_save):
             lambda x: "" if str(x).strip().lower() in ["nan", "none", "nat"] else str(x).strip()
         )
 
-    with get_connection() as conn:
-        df_to_save.to_sql(TABLE_NAME, conn, if_exists="replace", index=False)
-
+    if engine:
+        df_to_save.to_sql(TABLE_NAME, engine, if_exists="replace", index=False)
+    else:
+        with get_connection() as conn:
+            df_to_save.to_sql(TABLE_NAME, conn, if_exists="replace", index=False)
     df_to_save.to_csv(file_name, index=False)
 
 
