@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Secure Access Login | The Pink Black Panthers</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        :root {
+            --black: #08080b;
+            --pink: #ff4fa3;
+            --hot-pink: #ff2f92;
+            --deep-pink: #c2185b;
+            --white: #ffffff;
+            --text-dark: #151515;
+            --text-muted: #555555;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            background: white;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .top-nav {
+            width: 100%;
+            min-height: 108px;
+            padding: 0 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background:
+                radial-gradient(circle at right, rgba(255,79,163,0.22), transparent 30%),
+                var(--black);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 34px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+
+        .brand::first-letter {
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            padding: 15px 22px;
+            border-radius: 999px;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,79,163,0.16);
+            color: var(--pink);
+            transform: translateY(-2px);
+        }
+
+        .page {
+            min-height: calc(100vh - 108px);
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .info-panel {
+            padding: 80px 72px;
+            background:
+                radial-gradient(circle at top left, rgba(255,79,163,0.10), transparent 30%),
+                white;
+        }
+
+        .login-panel {
+            padding: 80px 72px;
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.32), transparent 28%),
+                linear-gradient(145deg, #08080b 0%, #171018 70%, #2a1020 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-panel::before {
+            content: "";
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: rgba(255,79,163,0.22);
+            right: -90px;
+            top: -90px;
+            filter: blur(12px);
+            animation: floatGlow 5s ease-in-out infinite;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #111;
+            color: white;
+            padding: 14px 22px;
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 28px;
+        }
+
+        .badge::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            background: var(--pink);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--pink);
+        }
+
+        h1 {
+            font-size: 64px;
+            line-height: 1.05;
+            margin: 0 0 18px;
+            letter-spacing: -2px;
+            color: #111;
+        }
+
+        h1 span {
+            color: var(--deep-pink);
+        }
+
+        .subtitle {
+            max-width: 850px;
+            font-size: 21px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 38px;
+        }
+
+        .feature-box {
+            background: #fff5fa;
+            padding: 28px;
+            border-radius: 24px;
+            border-left: 7px solid var(--pink);
+            font-size: 18px;
+            line-height: 1.8;
+            color: #333;
+            margin-bottom: 34px;
+        }
+
+        .access-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .access-item {
+            padding: 22px;
+            border-radius: 22px;
+            background: #fff5fa;
+            border: 1px solid #f3dce7;
+            transition: 0.25s ease;
+            animation: slideUp 0.7s ease both;
+        }
+
+        .access-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--pink);
+            box-shadow: 0 18px 40px rgba(255,79,163,0.12);
+        }
+
+        .access-item strong {
+            display: block;
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #111;
+        }
+
+        .access-item p {
+            margin: 0;
+            font-size: 17px;
+            line-height: 1.6;
+            color: var(--text-muted);
+        }
+
+        .login-panel h2,
+        .login-panel p,
+        form,
+        .note {
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-panel h2 {
+            font-size: 52px;
+            line-height: 1.1;
+            margin: 0 0 24px;
+            letter-spacing: -1px;
+        }
+
+        .login-panel p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #f2e7ee;
+            margin-bottom: 34px;
+        }
+
+        .error-box {
+            background: #ffe0ea;
+            color: #a10f4d;
+            padding: 16px 18px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+            font-size: 17px;
+            font-weight: bold;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 17px;
+            color: white;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 22px;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 20px;
+            font-family: Arial, sans-serif;
+            font-size: 12pt;
+            outline: none;
+            background: rgba(255,255,255,0.96);
+            color: #111;
+            transition: 0.25s ease;
+        }
+
+        .form-group input:focus {
+            border-color: var(--pink);
+            box-shadow: 0 0 0 4px rgba(255,79,163,0.22);
+        }
+
+        .login-btn {
+            width: 100%;
+            border: none;
+            padding: 23px;
+            border-radius: 20px;
+            background: #08080b;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 16px 35px rgba(0,0,0,0.32);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-4px);
+            background: var(--pink);
+            box-shadow: 0 18px 40px rgba(255,79,163,0.32);
+        }
+
+        .note {
+            margin-top: 24px;
+            font-size: 17px;
+            color: #f3dce7;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(22px); }
+        }
+
+        @media (max-width: 1100px) {
+            .top-nav {
+                padding: 28px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand {
+                font-size: 30px;
+                white-space: normal;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+            }
+
+            .page {
+                grid-template-columns: 1fr;
+            }
+
+            .info-panel,
+            .login-panel {
+                padding: 55px 28px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .access-grid,
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="top-nav">
+        <div class="brand">The Pink Black Panthers</div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/log-ticket">Log Ticket</a>
+            <a href="/portal">Department Portal</a>
+            <a href="/admin-login?next=executive">Operations Overview</a>
+            <a href="/admin-login?next=analytics">Insights & Analytics</a>
+            <a href="/admin-login?next=reports">Business Reports</a>
+        </div>
+    </div>
+
+    <main class="page">
+
+        <section class="info-panel">
+            <div class="badge">Internal Secure Access</div>
+
+            <h1>Protected <span>Business Areas</span></h1>
+
+            <p class="subtitle">
+                Executive oversight, analytics, and reporting contain sensitive operational information.
+                These areas are protected so that only authorised internal users can access business performance,
+                governance, approval, and reporting data.
+            </p>
+
+            <div class="feature-box">
+                <strong>Access Control Purpose:</strong><br>
+                Ticket intake remains open for request submission, while internal business pages are protected
+                because they expose department workload, risk flags, approval states, response times, and reports.
+            </div>
+
+            <div class="access-grid">
+                <div class="access-item">
+                    <strong>Executive Dashboard</strong>
+                    <p>Organisation-wide ticket visibility, governance, approvals, and risk oversight.</p>
+                </div>
+
+                <div class="access-item">
+                    <strong>Analytics Dashboard</strong>
+                    <p>Performance trends, ticket volumes, response-time metrics, and predictive insights.</p>
+                </div>
+
+                <div class="access-item">
+                    <strong>Reports Centre</strong>
+                    <p>PDF report generation for executive, department, and priority-based reporting.</p>
+                </div>
+
+                <div class="access-item">
+                    <strong>Internal Governance</strong>
+                    <p>Supports business control over sensitive operational information.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="login-panel">
+            {% if next_target == "analytics" %}
+                <h2>Access Analytics</h2>
+                <p>Enter your details and admin password to view analytics and predictive insights.</p>
+            {% elif next_target == "reports" %}
+                <h2>Access Reports</h2>
+                <p>Enter your details and admin password to generate protected business reports.</p>
+            {% else %}
+                <h2>Executive Access</h2>
+                <p>Enter your details and admin password to access executive oversight.</p>
+            {% endif %}
+
+            {% if error %}
+                <div class="error-box">{{ error }}</div>
+            {% endif %}
+
+            <form method="POST" action="/admin-login">
+                <input type="hidden" name="next" value="{{ next_target }}">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="first_name">First Name</label>
+                        <input
+                            type="text"
+                            id="first_name"
+                            name="first_name"
+                            placeholder="Enter first name"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="surname">Surname</label>
+                        <input
+                            type="text"
+                            id="surname"
+                            name="surname"
+                            placeholder="Enter surname"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Admin Password</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter admin password"
+                        required
+                    >
+                </div>
+
+                <button class="login-btn" type="submit">
+                    {% if next_target == "analytics" %}
+                        Access Analytics Dashboard
+                    {% elif next_target == "reports" %}
+                        Access Reports Centre
+                    {% else %}
+                        Access Executive Dashboard
+                    {% endif %}
+                </button>
+            </form>
+
+            <div class="note">
+                This is a prototype access-control layer. A production business system would normally use
+                user accounts, role-based permissions, and secure authentication such as SSO or Active Directory.
+            </div>
+        </section>
+
+    </main>
+
+</body>
+</html>

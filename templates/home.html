@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Pink Black Panthers Service Operations Platform</title>
+
+    <style>
+    * {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --black: #08080b;
+        --dark: #111116;
+        --pink: #ff4fa3;
+        --hot-pink: #ff2f92;
+        --deep-pink: #c2185b;
+        --white: #ffffff;
+        --soft-bg: #fff7fb;
+        --text-dark: #151515;
+        --text-muted: #555555;
+    }
+
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        background: var(--soft-bg);
+        color: var(--text-dark);
+        overflow-x: hidden;
+    }
+
+    .page {
+        min-height: 100vh;
+        background: white;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    .top-nav {
+        height: 108px;
+
+        padding: 0 72px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        background:
+            radial-gradient(circle at right,
+                rgba(255,79,163,0.22),
+                transparent 30%),
+            #08080b;
+
+        border-bottom: 1px solid rgba(255,255,255,0.08);
+
+        position: sticky;
+        top: 0;
+        z-index: 100;
+    }
+
+    .brand {
+        font-family: Arial, sans-serif;
+        font-size: 36px;
+        font-weight: 900;
+        color: white;
+        letter-spacing: -1px;
+    }
+
+    .brand::first-letter {
+        color: var(--pink);
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+    }
+
+    .nav-links a {
+        font-family: Arial, sans-serif;
+
+        text-decoration: none;
+
+        color: white;
+
+        font-size: 20px;
+
+        font-weight: 400;
+
+        letter-spacing: 0.3px;
+
+        padding: 15px 22px;
+
+        border-radius: 999px;
+
+        transition: 0.25s ease;
+        }
+
+    .nav-links a:hover {
+        background: rgba(255,79,163,0.16);
+        color: var(--pink);
+        transform: translateY(-2px);
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================== */
+
+    .hero {
+        background:
+            radial-gradient(circle at top right,
+                rgba(255,79,163,0.22),
+                transparent 28%),
+
+            radial-gradient(circle at bottom left,
+                rgba(255,79,163,0.10),
+                transparent 25%),
+
+            #08080b;
+
+        min-height: calc(100vh - 108px);
+
+        padding: 100px 72px 180px;
+
+        display: grid;
+        grid-template-columns: 1.08fr 0.92fr;
+        gap: 85px;
+        align-items: center;
+    }
+
+    .tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+
+        background: rgba(255,79,163,0.12);
+
+        border: 1px solid rgba(255,79,163,0.34);
+
+        color: white;
+
+        padding: 15px 25px;
+
+        border-radius: 999px;
+
+        font-size: 16px;
+        font-weight: bold;
+
+        margin-bottom: 32px;
+    }
+
+    .tag::before {
+        content: "";
+
+        width: 10px;
+        height: 10px;
+
+        border-radius: 50%;
+
+        background: var(--pink);
+    }
+
+    h1 {
+        font-family: Arial, sans-serif;
+
+        font-size: 82px;
+
+        line-height: 1.02;
+
+        letter-spacing: -3px;
+
+        margin: 0 0 30px;
+
+        color: white;
+
+        max-width: 920px;
+    }
+
+    h1 span {
+        color: var(--pink);
+    }
+
+    .subtitle {
+        font-size: 23px;
+
+        line-height: 1.8;
+
+        color: #ece3e8;
+
+        max-width: 760px;
+
+        margin-bottom: 38px;
+    }
+
+    .team {
+        font-size: 17px;
+
+        font-weight: bold;
+
+        text-transform: uppercase;
+
+        letter-spacing: 2px;
+
+        color: #ffb7d5;
+
+        margin-bottom: 42px;
+    }
+
+    .button-row {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        font-family: Arial, sans-serif;
+
+        text-decoration: none;
+
+        padding: 18px 30px;
+
+        border-radius: 999px;
+
+        font-size: 17px;
+
+        font-weight: bold;
+
+        transition: 0.25s ease;
+    }
+
+    .btn:hover {
+        transform: translateY(-4px);
+    }
+
+    .btn-pink {
+        background: linear-gradient(
+            135deg,
+            var(--pink),
+            var(--hot-pink)
+        );
+
+        color: white;
+
+        box-shadow: 0 0 32px rgba(255,79,163,0.34);
+    }
+
+    .btn-dark {
+        background: white;
+        color: black;
+    }
+
+    .btn-outline {
+        border: 1px solid rgba(255,255,255,0.24);
+
+        background: rgba(255,255,255,0.04);
+
+        color: white;
+    }
+
+    .btn-outline:hover {
+        background: white;
+        color: black;
+    }
+
+    /* =========================
+       RIGHT PANEL
+    ========================== */
+
+    .side-content {
+        background: white;
+
+        border-radius: 38px;
+
+        padding: 46px;
+
+        box-shadow: 0 40px 100px rgba(0,0,0,0.30);
+    }
+
+    .side-content h2 {
+        font-size: 42px;
+
+        margin: 0 0 20px;
+
+        letter-spacing: -1px;
+    }
+
+    .side-content p {
+        font-size: 19px;
+
+        line-height: 1.8;
+
+        color: #333333;
+
+        margin-bottom: 28px;
+    }
+
+    .side-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .side-content li {
+        position: relative;
+
+        padding-left: 34px;
+
+        margin-bottom: 16px;
+
+        font-size: 18px;
+
+        line-height: 1.8;
+    }
+
+    .side-content li::before {
+        content: "✦";
+
+        position: absolute;
+
+        left: 0;
+
+        color: var(--pink);
+    }
+
+    /* =========================
+       WORKFLOW SECTION
+    ========================== */
+
+    .section {
+        position: relative;
+
+        margin: -90px 72px 0;
+
+        background: white;
+
+        border-radius: 42px;
+
+        padding: 90px 65px;
+
+        box-shadow: 0 40px 100px rgba(0,0,0,0.18);
+
+        z-index: 5;
+    }
+
+    .section-title {
+        font-size: 54px;
+
+        margin: 0 0 18px;
+
+        letter-spacing: -2px;
+
+        color: #111111;
+    }
+
+    .section-intro {
+        font-size: 22px;
+
+        line-height: 1.8;
+
+        color: var(--text-muted);
+
+        max-width: 950px;
+
+        margin-bottom: 65px;
+    }
+
+    .workflow-line {
+        display: grid;
+
+        grid-template-columns: repeat(4, 1fr);
+
+        gap: 42px;
+
+        min-height: 280px;
+
+        align-items: start;
+    }
+
+    .workflow-item {
+        padding-top: 45px;
+        padding-bottom: 45px;
+
+        border-top: 4px solid #111111;
+
+        transition: 0.25s ease;
+    }
+
+    .workflow-item:hover {
+        transform: translateY(-6px);
+
+        border-top-color: var(--pink);
+    }
+
+    .workflow-number {
+        font-size: 52px;
+
+        font-weight: bold;
+
+        color: var(--pink);
+
+        margin-bottom: 12px;
+    }
+
+    .workflow-item h3 {
+        font-size: 30px;
+
+        margin: 0 0 14px;
+
+        color: #111111;
+    }
+
+    .workflow-item p {
+        font-size: 18px;
+
+        line-height: 1.8;
+
+        color: #444444;
+
+        margin: 0;
+    }
+
+    /* =========================
+       LOWER SECTION
+    ========================== */
+
+    .info-grid {
+        background: white;
+
+        padding: 110px 72px 90px;
+
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 85px;
+    }
+
+    .info-section {
+        border-left: 6px solid var(--pink);
+
+        padding-left: 30px;
+    }
+
+    .info-section h3 {
+        font-size: 40px;
+
+        margin: 0 0 18px;
+
+        letter-spacing: -1px;
+    }
+
+    .info-section p {
+        font-size: 19px;
+
+        line-height: 1.85;
+
+        color: var(--text-muted);
+
+        margin: 0;
+    }
+
+    .highlight {
+        color: var(--deep-pink);
+        font-weight: bold;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================== */
+
+    @media (max-width: 1100px) {
+
+        .top-nav {
+            height: auto;
+
+            padding: 30px 28px;
+
+            flex-direction: column;
+
+            align-items: flex-start;
+        }
+
+        .hero,
+        .workflow-line,
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .hero {
+            padding: 70px 28px 150px;
+        }
+
+        .section {
+            margin: -70px 28px 0;
+
+            padding: 50px 35px;
+        }
+
+        .info-grid {
+            padding: 90px 28px 70px;
+        }
+
+        h1 {
+            font-size: 54px;
+
+            letter-spacing: -1px;
+        }
+
+        .subtitle {
+            font-size: 20px;
+        }
+
+        .brand {
+            font-size: 30px;
+        }
+    }
+
+    @media (max-width: 650px) {
+
+        h1 {
+            font-size: 44px;
+        }
+
+        .section-title {
+            font-size: 42px;
+        }
+
+        .button-row {
+            flex-direction: column;
+        }
+
+        .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+        .side-content {
+            padding: 32px 24px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="top-nav">
+        <div class="brand">The Pink Black Panthers</div>
+
+       <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="/log-ticket">Log Ticket</a>
+            <a href="/portal">Department Portal</a>
+            <a href="/admin-login?next=executive">Operations Overview</a>
+            <a href="/admin-login?next=analytics">Insights & Analytics</a>
+            <a href="/admin-login?next=reports">Business Reports</a>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div>
+            <div class="tag">AI-Enabled Service Operations</div>
+
+            <h1>
+                Service operations powered by
+                <span>hybrid AI</span> and workflow automation.
+            </h1>
+
+            <p class="subtitle">
+                A centralized ticket management system for classifying requests,
+                routing them to the correct department, monitoring risk, tracking progress,
+                and supporting executive decision-making.
+            </p>
+
+            <div class="team">Built by The Pink Black Panthers</div>
+
+            <div class="button-row">
+                <a href="/log-ticket" class="btn btn-pink">Log a Ticket</a>
+                <a href="/portal" class="btn btn-dark">Department Portal</a>
+                <a href="/admin-login?next=analytics" class="btn btn-outline">View Analytics</a>
+                <a href="/admin-login?next=executive" class="btn btn-outline">Executive Access</a>
+            </div>
+        </div>
+
+        <div class="side-content">
+            <h2>What the platform does</h2>
+
+            <p>
+                The system combines machine learning classification with rule-based governance
+                to support realistic service desk operations.
+            </p>
+
+            <ul>
+                <li>Predicts the correct ticket department</li>
+                <li>Detects priority and urgency</li>
+                <li>Routes tickets into department workflows</li>
+                <li>Flags sensitive or risky requests</li>
+                <li>Tracks response time after tickets are closed</li>
+                <li>Supports analytics, reports, and forecasting</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">How the workflow moves</h2>
+
+        <p class="section-intro">
+            The platform follows a simple operational flow from ticket submission to resolution.
+            Each step is connected so the dashboards, analytics, and reports stay updated.
+        </p>
+
+        <div class="workflow-line">
+            <div class="workflow-item">
+                <div class="workflow-number">01</div>
+                <h3>Submit</h3>
+                <p>Users describe their issue through the ticket logging page.</p>
+            </div>
+
+            <div class="workflow-item">
+                <div class="workflow-number">02</div>
+                <h3>Classify</h3>
+                <p>The ML model predicts the department and records the confidence level.</p>
+            </div>
+
+            <div class="workflow-item">
+                <div class="workflow-number">03</div>
+                <h3>Route</h3>
+                <p>The system sends the ticket to the correct department or review queue.</p>
+            </div>
+
+            <div class="workflow-item">
+                <div class="workflow-number">04</div>
+                <h3>Resolve</h3>
+                <p>Departments process the ticket, close it, and generate response-time data.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="info-grid">
+            <div class="info-section">
+                <h3>Executive oversight</h3>
+                <p>
+                    Executives can monitor organisation-wide ticket activity, risk flags,
+                    approval status, AI confidence, workload trends, and report outputs.
+                    The executive view supports <span class="highlight">visibility and decision-making</span>,
+                    not day-to-day ticket handling.
+                </p>
+            </div>
+
+            <div class="info-section">
+                <h3>Realistic operations</h3>
+                <p>
+                    Departments manage the active work. Tickets move from open to in progress
+                    and then closed. Response time is calculated when the ticket is closed,
+                    making the workflow more realistic than using random response-time values.
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,11 @@
+Flask
+pandas
+scikit-learn
+joblib
+reportlab
+openpyxl
+numpy
+matplotlib
+gunicorn
+psycopg2-binary
+sqlalchemy

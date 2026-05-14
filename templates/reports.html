@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Executive Report Generator | The Pink Black Panthers</title>
+
+    <style>
+        * { box-sizing: border-box; }
+
+        :root {
+            --black: #08080b;
+            --pink: #ff4fa3;
+            --hot-pink: #ff2f92;
+            --deep-pink: #c2185b;
+            --text-dark: #151515;
+            --text-muted: #555555;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: white;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .top-nav {
+            width: 100%;
+            min-height: 108px;
+            padding: 0 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background:
+                radial-gradient(circle at right, rgba(255,79,163,0.22), transparent 30%),
+                var(--black);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 34px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -1px;
+            white-space: nowrap;
+        }
+
+        .brand::first-letter {
+            color: var(--pink);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            font-weight: 400;
+            padding: 15px 22px;
+            border-radius: 999px;
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,79,163,0.16);
+            color: var(--pink);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            padding: 78px 72px 70px;
+            background:
+                radial-gradient(circle at top right, rgba(255,79,163,0.28), transparent 30%),
+                linear-gradient(145deg, #08080b 0%, #171018 75%, #2a1020 100%);
+            color: white;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            padding: 14px 22px;
+            border: 1px solid rgba(255,255,255,0.16);
+            border-radius: 999px;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 28px;
+        }
+
+        .badge::before {
+            content: "";
+            width: 9px;
+            height: 9px;
+            background: var(--pink);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--pink);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.05;
+            margin: 0 0 18px;
+            letter-spacing: -2px;
+        }
+
+        .hero h1 span {
+            color: var(--pink);
+        }
+
+        .hero p {
+            max-width: 1100px;
+            font-size: 21px;
+            line-height: 1.8;
+            color: #f2e7ee;
+            margin: 0;
+        }
+
+        .page {
+            padding: 55px 72px 85px;
+            background: white;
+        }
+
+        .report-layout {
+            display: grid;
+            grid-template-columns: 1.05fr 0.95fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .form-card {
+            background: white;
+            border: 1px solid #f0d9e2;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 70px rgba(0,0,0,0.08);
+            animation: fadeIn 0.9s ease;
+        }
+
+        .form-card h2 {
+            margin-top: 0;
+            margin-bottom: 16px;
+            font-size: 44px;
+            letter-spacing: -1px;
+        }
+
+        .form-card p {
+            color: var(--text-muted);
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 28px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            font-size: 17px;
+        }
+
+        select {
+            width: 100%;
+            padding: 20px;
+            margin-bottom: 26px;
+            border-radius: 18px;
+            border: 1px solid #ead4df;
+            background: #fffafd;
+            font-family: Arial, sans-serif;
+            font-size: 14pt;
+            transition: 0.25s ease;
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--pink);
+            box-shadow: 0 0 0 4px rgba(255,79,163,0.16);
+        }
+
+        button {
+            width: 100%;
+            border: none;
+            padding: 23px;
+            border-radius: 20px;
+            background: #08080b;
+            color: white;
+            font-family: Arial, sans-serif;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 16px 35px rgba(0,0,0,0.32);
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            background: var(--pink);
+            box-shadow: 0 18px 40px rgba(255,79,163,0.32);
+        }
+
+        .info-card {
+            padding: 42px;
+            border-radius: 30px;
+            background:
+                radial-gradient(circle at top right, rgba(255,255,255,0.16), transparent 28%),
+                linear-gradient(145deg, #08080b 0%, #171018 70%, #2a1020 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: "";
+            position: absolute;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255,79,163,0.22);
+            right: -80px;
+            top: -80px;
+            filter: blur(12px);
+            animation: floatGlow 5s ease-in-out infinite;
+        }
+
+        .info-card h3,
+        .info-card p,
+        .mini-list,
+        .feature-grid,
+        .security-note {
+            position: relative;
+            z-index: 2;
+        }
+
+        .info-card h3 {
+            margin-top: 0;
+            margin-bottom: 18px;
+            font-size: 42px;
+            line-height: 1.1;
+        }
+
+        .info-card p {
+            font-size: 20px;
+            line-height: 1.8;
+            color: #f2e7ee;
+            margin-bottom: 24px;
+        }
+
+        .mini-list {
+            margin: 0 0 28px;
+            padding-left: 24px;
+        }
+
+        .mini-list li {
+            font-size: 18px;
+            line-height: 1.9;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .feature-box {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 18px;
+            padding: 18px;
+            font-size: 16px;
+            font-weight: bold;
+            line-height: 1.6;
+            transition: 0.25s ease;
+        }
+
+        .feature-box:hover {
+            transform: translateY(-4px);
+            background: rgba(255,79,163,0.18);
+        }
+
+        .security-note {
+            margin-top: 28px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 20px;
+            padding: 22px;
+            color: #f3dce7;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes floatGlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(22px); }
+        }
+
+        @media (max-width: 1100px) {
+            .top-nav {
+                padding: 28px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .brand {
+                font-size: 30px;
+                white-space: normal;
+            }
+
+            .nav-links a {
+                font-size: 18px;
+            }
+
+            .hero,
+            .page {
+                padding-left: 28px;
+                padding-right: 28px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .report-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="top-nav">
+    <div class="brand">The Pink Black Panthers</div>
+
+    <div class="nav-links">
+        <a href="/">Home</a>
+        <a href="/log-ticket">Log Ticket</a>
+        <a href="/portal">Department Portal</a>
+        <a href="/admin-login?next=executive">Operations Overview</a>
+        <a href="/admin-login?next=analytics">Insights & Analytics</a>
+        <a href="/admin-login?next=reports">Business Reports</a>
+    </div>
+</div>
+
+<section class="hero">
+    <div class="badge">Protected Executive Reporting</div>
+
+    <h1>The <span>Reports</span> Centre</h1>
+
+    <p>
+        Generate structured business reports from current ticket activity, including executive governance,
+        department performance, priority analysis, risk visibility, approval status, requester details,
+        response times, and resolution comments.
+    </p>
+</section>
+
+<main class="page">
+
+    <div class="report-layout">
+
+        <div class="form-card">
+            <h2>Generate PDF Report</h2>
+
+            <p>
+                Select the report type and filter. This report centre is intended for authorised users only
+                because it contains operational and governance information.
+            </p>
+
+            <form method="POST" action="/generate-report">
+
+                <label for="report_type">Report Type</label>
+                <select name="report_type" id="report_type" onchange="updateFilterOptions()">
+                    <option value="executive">Executive Governance Report</option>
+                    <option value="department">Department Performance Report</option>
+                    <option value="priority">Priority & Urgency Report</option>
+                </select>
+
+                <label for="filter_value">Filter</label>
+                <select name="filter_value" id="filter_value">
+                    <option value="All">All</option>
+                </select>
+
+                <button type="submit">Generate PDF Report</button>
+
+            </form>
+        </div>
+
+        <div class="info-card">
+            <h3>What this reporting area supports</h3>
+
+            <p>
+                Use this reporting area to produce structured PDF outputs for oversight,
+                department review, compliance monitoring, and workflow performance tracking.
+            </p>
+
+            <ul class="mini-list">
+                <li>Executive reports for broad operational visibility</li>
+                <li>Department reports for function-specific workload review</li>
+                <li>Priority reports for urgent and high-impact tickets</li>
+                <li>Governance reporting for risk flags and approval workflows</li>
+                <li>Resolution reporting using final closure comments</li>
+            </ul>
+
+            <div class="feature-grid">
+                <div class="feature-box">Risk & Compliance</div>
+                <div class="feature-box">Approval Workflow</div>
+                <div class="feature-box">Response Times</div>
+                <div class="feature-box">PDF Export</div>
+            </div>
+
+            <div class="security-note">
+                <strong>Access-Control Note:</strong><br>
+                Reports are protected through the shared admin access form. In a production environment,
+                this would usually be replaced by role-based authentication.
+            </div>
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+    const categories = {{ categories | tojson }};
+    const priorities = {{ priorities | tojson }};
+
+    function updateFilterOptions() {
+        const reportType = document.getElementById("report_type").value;
+        const filterSelect = document.getElementById("filter_value");
+
+        filterSelect.innerHTML = "";
+
+        const allOption = document.createElement("option");
+        allOption.value = "All";
+        allOption.textContent = "All";
+        filterSelect.appendChild(allOption);
+
+        let options = [];
+
+        if (reportType === "department") {
+            options = categories;
+        } else if (reportType === "priority") {
+            options = priorities;
+        }
+
+        options.forEach(item => {
+            const option = document.createElement("option");
+            option.value = item;
+            option.textContent = item;
+            filterSelect.appendChild(option);
+        });
+    }
+
+    updateFilterOptions();
+</script>
+
+</body>
+</html>
